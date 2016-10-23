@@ -33,16 +33,13 @@
 	}(document, 'script', 'facebook-jssdk'));</script>
 	
 	<!--map here-->
-	<!--<div id="mapsit" style="display: none; height: 50rem;" >-->
-		<div id="map" style="width:100%;height:50%"></div>
-  <!--</div>-->
+	<div id="map"></div>
   
   <!--yield here-->
 	<div id="body"></div>
 	
   <script type="text/javascript">
 var dist = 0;
-var enough = 3; //enough distance to allow access
 var blat = 37.459964; //bonboo latitude
 var blng = 126.95125289999999; //bonboo longitude
   
@@ -80,11 +77,10 @@ function initMap() {
       };
 
       dist = Math.sqrt(Math.pow(blat - pos.lat,2)+Math.pow(blng - pos.lng,2)); //dist between curr location and bonboo
-      console.log('right after calculation');
-      console.log(dist);
-      
-    	
-    	if (dist < enough){
+      console.log(dist)
+        	
+    // 	if (dist < 0.0005){    //if near enough
+    if (dist < 10){ //temporary
     		console.log('entered yield block');
     		$('#map').hide();
     		$('#body').html(
@@ -92,7 +88,7 @@ function initMap() {
     		);
     	}
     	
-      infoWindow.setContent('far away.');
+      infoWindow.setContent('본부에서 멀어 접속할 수 없습니다');
       infoWindow.setPosition(pos);
       map.setCenter(pos);
     }, function() {
@@ -107,7 +103,7 @@ function initMap() {
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
+                        'GPS 정보를 받아오는 데 실패했습니다.' :
                         'Error: Your browser doesn\'t support geolocation.');
 }
     </script>
