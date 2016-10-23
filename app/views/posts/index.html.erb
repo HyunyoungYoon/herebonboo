@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+  <% content_for :head do %>
+    <!--for facebook share-->
+    <meta property="og:url"           content="https://share-fb-hyunyoungyoon.c9users.io/posts" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="here bonboo:본부 주변에서 활성화되는 타임라인" />
+    <meta property="og:description"   content="여기를 클릭해서 본부 점거 소식을 공유해 보세요" />
+    <meta property="og:image"         content="ahf.jpg" />
+  <% end %>
+</head>
+<body>
+<p style="color:white"> 본부 위치 기반 웹사이트 here bonboo beta version</p>
+<p style="color:whihte"> 본 서비스는 모바일 뷰에 최적화되어 있습니다 </p>
+<a href="https://goo.gl/forms/JatGykZWkt4CF3TW2"><p style="color:white">여기를 클릭해 피드백을 남겨주세요</p></a>
+<div class="container">
+    <div class="page-header">
+      <!--front image-->
+      <%= image_tag("ahf.jpg", width: '100%', class: 'front_img') %>
+      
+      <!-- Your share button code -->
+      <div align = "right">
+      	<div class="fb-share-button" 
+      		data-href="https://share-fb-hyunyoungyoon.c9users.io/posts" 
+      		data-layout="button"
+      		data-mobile_iframe=true
+      		data-size=large
+      		style="margin:10px">
+      	</div>
+      </div>
+      <h3 style="color:white" id="timeline">점거<%= TimeDifference.between(Time.new(2016,10,10), Time.now).in_days.ceil %>일째 본부 타임라인</h3>
+    </div>
+    
+    <div class="tlbox">
+      <ul class="timeline">
+        <!--form for new post-->
+        <li>
+          <div class="timeline-badge warning"><img src="assets/footprint_wh.png"  style='max-height: 60%'></div>
+          <div class="timeline-panel" style="box-shadow: 4px 7px 8px #A1A1A1; background: rgba(225, 225, 225, 0.6)">
+            <%= form_for @post do |p| %>
+              <%= p.text_area :content, class: "text_area", rows: '5'%>
+              <br>
+              <%= p.submit '발자취 남기기', class: 'submit' %>
+            <% end %>
+          </div>
+        </li>
+        <!--post list-->
+        <% @posts.each do |p| %>
+          <%= render partial: 'postbox', locals: {p: p} %>
+        <% end %>
+        
+      </ul>
+    </div> <!--.tlbox-->
+</div> <!--.container-->
+
+</body>
+</html>

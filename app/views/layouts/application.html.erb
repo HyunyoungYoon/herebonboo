@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>here bonboo</title>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <% csrf_meta_tags <%>
+  
+  <!--bootstrap cdn-->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+  
+  <% if content_for? :head %>
+  	<%= yield :head %>
+  <% end %>
+  
+</head>
+<body>
+	<!-- Load Facebook SDK for JavaScript -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	
+	<!--map here-->
+	<!--<div id="mapsit" style="display: none; height: 50rem;" >-->
+		<div id="map" style="width:100%;height:50%"></div>
+  <!--</div>-->
+  
+  <!--yield here-->
+	<div id="body"></div>
+	
+  <script type="text/javascript">
+var dist = 0;
+var enough = 3; //enough distance to allow access
+var blat = 37.459964; //bonboo latitude
+var blng = 126.95125289999999; //bonboo longitude
+  
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: blat, lng: blng}, //set center to bonboo
+    zoom: 15
+  });
+  var infoWindow = new google.maps.InfoWindow({map: map});
+  
+  //marker for bonboo
+  var marker = new google.maps.Marker({
+    position: {lat: blat, lng: blng},
+    map: map
+  });
+  //circle around bonboo
+  var cityCircle = new google.maps.Circle({
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.5,
+    strokeWeight: 0.5,
+    fillColor: '#FF0000',
+    fillOpacity: 0.2,
+    map: map,
+    center: {lat: blat, lng: blng},
+    radius: 100
+  });
+
+ 
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      dist = Math.sqrt(Math.pow(blat - pos.lat,2)+Math.pow(blng - pos.lng,2)); //dist between curr location and bonboo
+      console.log('right after calculation');
+      console.log(dist);
+      
+    	
+    	if (dist < enough){
+    		console.log('entered yield block');
+    		$('#map').hide();
+    		$('#body').html(
+    			"<%= escape_javascript(yield) %>"
+    		);
+    	}
+    	
+      infoWindow.setContent('far away.');
+      infoWindow.setPosition(pos);
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
+    </script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClVrDTeTTjyHy_e7SiMKkKsWZBxDTS2fI&callback=initMap">
+</script>
+
+
+
+</body>
+</html>

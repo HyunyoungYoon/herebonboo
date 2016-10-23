@@ -1,0 +1,74 @@
+<div id="map" style="width:70%;height:50%"></div>
+    
+<script type="text/javascript">
+var dist = 0; 
+var blat = 37.459964; //bonboo latitude
+var blng = 126.95125289999999; //bonboo longitude
+  
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 37.459964, lng: 126.95125289999999}, //latitude and longitude of bonboo
+    zoom: 15
+  });
+  var infoWindow = new google.maps.InfoWindow({map: map});
+  
+  //marker for bonboo
+  var marker = new google.maps.Marker({
+    position: {lat: blat, lng: blng},
+    map: map
+  });
+  //circle around bonboo
+  var cityCircle = new google.maps.Circle({
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.5,
+    strokeWeight: 0.5,
+    fillColor: '#FF0000',
+    fillOpacity: 0.2,
+    map: map,
+    center: {lat: blat, lng: blng},
+    radius: 100
+  });
+
+ 
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      dist = Math.sqrt(Math.pow(blat - pos.lat,2)+Math.pow(blng - pos.lng,2)); //dist between curr location and bonboo
+      console.log('right after calculation');
+      console.log(dist);
+      console.log(pos.lat); console.log(pos.lng);
+      
+      infoWindow.setPosition(pos);
+      if (dist > 0.001){
+        infoWindow.setContent('far away.');
+      } else{
+        infoWindow.setContent('you are near.');
+      }
+      // map.setCenter(pos);
+      // whether or not update map center????
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClVrDTeTTjyHy_e7SiMKkKsWZBxDTS2fI&callback=initMap">
+  //call back functions defined later
+</script>
