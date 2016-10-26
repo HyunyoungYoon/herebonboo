@@ -194,11 +194,11 @@ DEPENDENCIES
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)
-<<<<<<< HEAD
+
   figaro
-=======
+
   fog-aws
->>>>>>> a43b2f15a79757b978a59aa6a123255e54e6e743
+
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.5)
