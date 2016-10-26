@@ -4,6 +4,7 @@ skip_before_action :verify_authenticity_token
 # due to the error: unprocessable entity (when executing ajax)
 
   def index
+    redirect_to '/posts'
   end
   
   def check

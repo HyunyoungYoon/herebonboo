@@ -7,22 +7,22 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="here bonboo:본부 주변에서 활성화되는 타임라인" />
     <meta property="og:description"   content="여기를 클릭해서 본부 점거 소식을 공유해 보세요" />
-    <meta property="og:image"         content="assets/ahf.jpg" />
+    <meta property="og:image"         content="assets/share.jpg" />
     <meta property="og:image:width"   content="400" />
     <meta property="og:image:height"  content="300" />
   <% end %>
 </head>
 <body>
-<h3 style="color:white"> 본부 위치 기반 웹사이트 here bonboo beta version</h3>
-<h3 style="color:white"> 본 서비스는 모바일 뷰에 최적화되어 있습니다 </h3>
-<a href="https://goo.gl/forms/JatGykZWkt4CF3TW2"><h1 style="color:white">여기를 클릭해 피드백을 남겨주세요</h1></a>
 <div class="container">
     <div class="page-header">
       <!--front image-->
-      <%= image_tag("ahf.jpg", width: '100%', class: 'front_img') %>
+      <text style="color:#e0e0e0;font-size:20px">이미지 출처: 대학신문</text>
+      <%= image_tag("front.jpg", width: '100%', class: 'front_img') %>
+      
       
       <!-- Your share button code -->
       <div align = "right">
+        <text style="color:#e0e0e0;font-size:20px">모바일에서 공유하려면 '데스크탑 버전으로 보기'를 이용하세요</text>
       	<div class="fb-share-button" 
       		data-href="https://herebonboo-beta-hyunyoungyoon.c9users.io/" 
       		data-layout="button"
@@ -31,7 +31,7 @@
       		style="margin:10px">
       	</div>
       </div>
-      <h3 style="color:white" id="timeline">점거<%= TimeDifference.between(Time.new(2016,10,10), Time.now).in_days.ceil %>일째 본부 타임라인</h3>
+      <h1 style="color:white" id="timeline">점거<%= TimeDifference.between(Time.new(2016,10,10), Time.now).in_days.ceil %>일째 본부 타임라인</h1>
     </div>
     
     <div class="tlbox">
