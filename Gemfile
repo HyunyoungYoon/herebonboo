@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 gem 'time_difference'
-gem 'figaro'
+
+gem 'figaro' #who add this?
+
+gem 'carrierwave'
+gem 'fog-aws'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
