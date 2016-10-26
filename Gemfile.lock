@@ -83,7 +83,11 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
->>>>>>> a43b2f15a79757b978a59aa6a123255e54e6e743
+
+
+
+
+
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
