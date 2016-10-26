@@ -42,6 +42,7 @@
           <div class="timeline-panel" style="box-shadow: 4px 7px 8px #A1A1A1; background: rgba(225, 225, 225, 0.6)">
             <%= form_for @post do |p| %>
               <%= p.text_area :content, class: "text_area", rows: '5'%>
+              <%= p.file_field :img_name %>
               <br>
               <%= p.submit '발자취 남기기', class: 'submit' %>
             <% end %>

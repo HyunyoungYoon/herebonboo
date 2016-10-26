@@ -2,6 +2,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.save
+      
+    uploader = HbUploader.new
+    uploader.store!(params[:img_name])
+    @post.update(img_name: uploader.url)
+    
     flash[:notice] = 'Your post has been successfully saved in timeline.' # does not work
     
     redirect_to posts_path
@@ -68,6 +73,6 @@ class PostsController < ApplicationController
   
   private
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :img_name)
   end
 end
