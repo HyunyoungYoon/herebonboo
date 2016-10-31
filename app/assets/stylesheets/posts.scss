@@ -191,7 +191,7 @@
 .outer_box { position:absolute;  }
 
 .text_area {
-  background-image: url('drawing.png');
+  background-image: image-url('drawing.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center; 
@@ -214,7 +214,7 @@
 
 body{
 
-  background-image: url('shuttleline2.jpg');
+  background-image: image-url('shuttleline2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; 

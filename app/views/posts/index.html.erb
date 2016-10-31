@@ -38,7 +38,7 @@
       <ul class="timeline">
         <!--form for new post-->
         <li>
-          <div class="timeline-badge warning"><img src="assets/footprint_wh.png"  style='max-height: 60%'></div>
+          <div class="timeline-badge warning"><%= image_tag("footprint_wh.png", width: '60%') %></div>
           <div class="timeline-panel" style="box-shadow: 4px 7px 8px #A1A1A1; background: rgba(225, 225, 225, 0.6)">
             <%= form_for @post do |p| %>
               <%= p.text_area :content, class: "text_area", rows: '5'%>
