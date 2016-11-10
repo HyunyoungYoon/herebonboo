@@ -1,4 +1,5 @@
 CarrierWave.configure do |config|
+=begin
   config.fog_credentials = {
     provider:              'AWS',                        # required
     aws_access_key_id:     ENV['AWS_ACCESS_KEY_ID'],   # required
@@ -7,6 +8,7 @@ CarrierWave.configure do |config|
     # host:                  's3.example.com',             # optional, defaults to nil
     endpoint:              'http://s3.ap-northeast-2.amazonaws.com' # optional, defaults to nil
   }
+=end
   config.fog_directory  = 'herebonboo'                          # required
   config.fog_public     = true                                        # optional, defaults to true
   config.fog_attributes = {} # { 'Cache-Control' => "max-age=#{365.day.to_i}" } # optional, defaults to {}
