@@ -79,8 +79,8 @@ function initMap() {
       dist = Math.sqrt(Math.pow(blat - pos.lat,2)+Math.pow(blng - pos.lng,2)); //dist between curr location and bonboo
       console.log(dist)
         	
-	if (dist < 0.0005){    //if near enough
-    //if (dist < 10){ //temporary
+	//if (dist < 0.001){    //if near enough
+   	if (dist < 5){ //temporary
     		console.log('entered yield block');
     		$('#map').hide();
     		$('#body').html(
