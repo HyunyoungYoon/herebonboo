@@ -19,7 +19,8 @@
     <div class="timeline-body">
       <p><%= p.content %></p>
       <% unless p.img_name == "" %>
-        <%= image_tag("#{p.img_name}", width:'100%') %>        
+        <%#= image_tag("#{p.img_name}", :width => '100%') %>
+        <img src="<%=p.img_name%>" width="42">
       <% end %>
     </div>
   </div>
