@@ -1,10 +1,9 @@
-
-<% if (p.id%2 == 0) %>
+<% if ((p.id % 2) == 0) %>
 <li>
 <% else %>
 <li class="timeline-inverted">
 <% end %>
-  <div class="timeline-badge"><%= image_tag("footprint_wh.png" , height:'60%' %></div>
+  <div class="timeline-badge"><%= image_tag("footprint_wh.png" , height:'60%') %></div>
   <div class="timeline-panel outer_box" style="background: rgba(225, 225, 225, 0.6)">
   <div class="postbox">
     <div class="timeline-heading">
@@ -18,12 +17,10 @@
     </div>
     <div class="timeline-body">
       <p><%= p.content %></p>
-      <% unless p.img_name == "" %>
-        <%#= image_tag("#{p.img_name}", :width => '100%') %>
-        <img src="<%=p.img_name%>" width="42">
+      <% if (p.img_name != "") %>
+        <%= image_tag("#{p.img_name}", width:'100%') %>        
       <% end %>
     </div>
   </div>
   </div>
 </li>
-
