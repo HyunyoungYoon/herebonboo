@@ -6,7 +6,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <% csrf_meta_tags %>
-  
+
   <!--bootstrap cdn-->
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -14,12 +14,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  
-  
+
+
   <% if content_for? :head %>
   	<%= yield :head %>
   <% end %>
-  
+
 </head>
 <body>
 	<!-- Load Facebook SDK for JavaScript -->
@@ -31,25 +31,25 @@
 	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
-	
+
 	<!--map here-->
 	<div id="map"></div>
-  
+
   <!--yield here-->
 	<div id="body"></div>
-	
+
   <script type="text/javascript">
 var dist = 0;
 var blat = 37.459964; //bonboo latitude
 var blng = 126.95125289999999; //bonboo longitude
-  
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: blat, lng: blng}, //set center to bonboo
     zoom: 15
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
-  
+
   //marker for bonboo
   var marker = new google.maps.Marker({
     position: {lat: blat, lng: blng},
@@ -67,7 +67,7 @@ function initMap() {
     radius: 100
   });
 
- 
+
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -78,16 +78,16 @@ function initMap() {
 
       dist = Math.sqrt(Math.pow(blat - pos.lat,2)+Math.pow(blng - pos.lng,2)); //dist between curr location and bonboo
       console.log(dist)
-        	
-	//if (dist < 0.001){    //if near enough
-   	if (dist < 5){ //temporary
+
+	  if (dist < 0.001){    //if near enough
+   // 	if (dist < 5){ //temporary
     		console.log('entered yield block');
     		$('#map').hide();
     		$('#body').html(
     			"<%= escape_javascript(yield) %>"
     		);
     	}
-    	
+
       infoWindow.setContent('본부에서 멀어 접속할 수 없습니다');
       infoWindow.setPosition(pos);
       map.setCenter(pos);
